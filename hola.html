@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Para Reyes S.A.S</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #ff9999;
+            padding: 30px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background-color: #4a90e2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+        }
+
+        .admin-panel {
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .admin-btn {
+            background-color: #999;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .admin-btn:hover {
+            background-color: #777;
+        }
+
+        #registerForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Café Para Reyes S.A.S</h1>
+    </div>
+
+    <div class="container">
+        <!-- Login Form -->
+        <div id="loginForm" class="form-container">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Usuario</label>
+                <input type="text" id="loginUsername">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Contraseña</label>
+                <input type="password" id="loginPassword">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-user-tag"></i> Rol</label>
+                <select id="userType">
+                    <option value="">Seleccione rol</option>
+                    <option value="empleado">Empleado</option>
+                    <option value="administrador">Administrador</option>
+                </select>
+            </div>
+            <button class="btn" onclick="login()">Iniciar sesión</button>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="#" onclick="showRegisterForm()">Registrarse</a>
+            </p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="form-container">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Usuario</label>
+                <input type="text" id="regUsername">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Correo</label>
+                <input type="email" id="regEmail">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Contraseña</label>
+                <input type="password" id="regPassword">
+            </div>
+            <button class="btn" onclick="register()">Registrarse</button>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="#" onclick="showLoginForm()">Volver al login</a>
+            </p>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="admin-panel">
+            <div class="admin-btn" onclick="verProducto()">
+                <i class="fas fa-eye"></i>
+                <h3>Ver Producto</h3>
+            </div>
+            <div class="admin-btn" onclick="agregarProducto()">
+                <i class="fas fa-plus"></i>
+                <h3>Agregar Producto</h3>
+            </div>
+            <div class="admin-btn" onclick="editarProducto()">
+                <i class="fas fa-edit"></i>
+                <h3>Editar producto</h3>
+            </div>
+            <div class="admin-btn" onclick="eliminarProducto()">
+                <i class="fas fa-trash"></i>
+                <h3>Eliminar Producto</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar/ocultar formularios
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+        }
+
+        // Funciones de login y registro
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const userType = document.getElementById('userType').value;
+
+            if (!username || !password || !userType) {
+                alert('Por favor complete todos los campos');
+                return;
+            }
+
+            if (userType === 'administrador') {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'grid';
+            } else {
+                alert('Iniciando sesión como empleado...');
+                // Aquí iría la lógica para el panel de empleado
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (!username || !email || !password) {
+                alert('Por favor complete todos los campos');
+                return;
+            }
+
+            alert('Registro exitoso');
+            showLoginForm();
+        }
+
+        // Funciones del panel de administrador
+        function verProducto() {
+            alert('Ver productos');
+            // Aquí iría la lógica para ver productos
+        }
+
+        function agregarProducto() {
+            alert('Agregar producto');
+            // Aquí iría la lógica para agregar productos
+        }
+
+        function editarProducto() {
+            alert('Editar producto');
+            // Aquí iría la lógica para editar productos
+        }
+
+        function eliminarProducto() {
+            alert('Eliminar producto');
+            // Aquí iría la lógica para eliminar productos
+        }
+    </script>
+</body>
+</html>

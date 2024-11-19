@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cafe Para Reyes S.A.S</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header section -->
+        <div class="header">
+            <h2>Cafe Para Reyes S.A.S</h2>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <!-- Dropdown for user role selection -->
+            <div class="form-group">
+                <label for="role">Rol:</label>
+                <select id="role" name="role" required>
+                    <option value="">Seleccione un rol</option>
+                    <option value="employee">Empleado</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+
+            <!-- Input for username -->
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" placeholder="Inserte correo" required>
+            </div>
+
+            <!-- Input for password -->
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" placeholder="Inserte contraseña" required>
+            </div>
+
+            <!-- Login button -->
+            <div class="form-group">
+                <button type="submit" class="btn">Iniciar sesión</button>
+            </div>
+        </form>
+        <p><a href="recuperacion.html">¿Olvidaste la contraseña?</a></p>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
+
